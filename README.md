@@ -1,11 +1,15 @@
 # Static Web Site Generator
 __"A Journey from WordPress to Markdown and Jinja"__
 
+### Status ..
+![License](https://img.shields.io/badge/License-MIT-green.svg)
+![up badge](https://img.shields.io/website-up-down-green-red/http/webgenerator.pages.dev.svg)
+
 ### Abstract
-Embark on a journey transitioning from a heavy CMS to a streamlined static site generator using Markdown and Jinja. This guide navigates the complexities of CMS, outlining benefits and drawbacks, and then transitions to the simplicity and efficiency of static site generation. By leveraging Markdown for content creation and Jinja for templating, this approach reduces overhead, improves site speed, and enhances customization. Learn to set up a workflow, convert content, manage metadata, and deploy a fast, cost-effective website using GitHub and Cloudflare.
+Embark on a journey transitioning from a heavy CMS to a streamlined static site generator using Markdown and Jinja. This guide navigates the complexities of CMS, outlining benefits and drawbacks, and then transitions to the simplicity and efficiency of static site generation. By leveraging Markdown for content creation and Jinja for templating, this approach reduces overhead, improves site speed, and enhances customization. 
 
 #### What you will learn
-- The strengths and limitations of using a CMS like WordPress for web development
+- Strengths and limitations of using a CMS like WordPress for web development
 - Benefits of transitioning to static site generation for simpler content management
 - How to write and manage content in Markdown
 - Techniques for storing and using metadata with JSON
@@ -22,10 +26,6 @@ The main idea is to publish markdown content in HTML, using Jinja Templates.
 [Github Repository](https://github.com/wolfpaulus/static-site-generator/) | [Posts in Markdown](https://github.com/wolfpaulus/static-site-generator/tree/main/posts) | [Demo Website](https://webgenerator.pages.dev)
 
 
-### Status ..
-![License](https://img.shields.io/badge/License-MIT-green.svg)
-![up badge](https://img.shields.io/website-up-down-green-red/http/webgenerator.pages.dev.svg)
-
 ## 1. WordPress
 
 A long time ago, I manually coded my website in HTML, CSS, and JavaScript. Then, about 10 years ago, I started using [WordPress](https://wordpress.com/learn/), which allowed me to focus more on the content.
@@ -34,11 +34,15 @@ Even today, WordPress is a popular content management system (CMS) that uses PHP
 
 ### PHP
 - **Purpose**: The scripting language used to build and run WordPress.
-- **Functionality**: PHP files generate [HTML](https://www.w3schools.com/html/default.asp) dynamically, handling everything from displaying content to processing form data.
-- **Customization**: Users can write custom PHP code to create themes and plugins, extending WordPress functionality.
+- **Functionality**: PHP files generate [HTML](https://www.w3schools.com/html/default.asp) __dynamically at runtime__, handling everything from displaying content to processing form data.
+- **Customization**: Users can write custom PHP code to create themes and plugins, extending WordPress' functionality.
+
+### Themes and Plugins
+- **Themes**: PHP templates control the layout and design of a site. Custom themes can be created using PHP, HTML, and CSS.
+- **Plugins**: Extend WordPress functionality. Plugins often contain PHP scripts that interact with the database using SQL queries.
 
 ### MySQL
-- **Purpose**: The relational database management system used to store and retrieve site data.
+- **Purpose**: The relational database management system is used to store and retrieve site data.
 - **Functionality**: WordPress uses SQL queries to interact with the MySQL database, managing content, user information, and site settings.
 - **Customization**: Users can write custom SQL queries for advanced data manipulation and retrieval.
 
@@ -46,10 +50,6 @@ Even today, WordPress is a popular content management system (CMS) that uses PHP
 ### Content Management
 - **Posts and Pages**: Stored in MySQL tables. PHP scripts retrieve and display this content on the website.
 - **Media Library**: Images and other media files are referenced in the database and managed through PHP functions.
-
-### Themes and Plugins
-- **Themes**: PHP templates control the layout and design of a site. Custom themes can be created using PHP, HTML, and CSS.
-- **Plugins**: Extend WordPress functionality. Plugins often contain PHP scripts that interact with the database using SQL queries.
 
 ### Dynamic Content
 - **PHP and SQL**: PHP scripts use SQL queries to fetch data from the MySQL database and display it to users.
@@ -84,40 +84,39 @@ Despite the following drawbacks, WordPress remains a popular choice due to its f
 
 ### Cost Considerations
 - Premium themes and plugins can be expensive.
-- Custom development may require hiring a developer.
  
 ## 2. Static Site Generation
 
-I'm maintaining two websites that I update maybe once a week. There are hardly any interactive parts, and all visitors get the same content. Considering this, the aforementioned process seems like overkill. So, what would a reasonable workflow look like that I would actually enjoy and would encourage me to create more and better content?
+I'm maintaining two websites that I update maybe once a week. There are hardly any interactive parts, and all visitors get the same content. Considering this, the aforementioned process seems like overkill. So, __what would a reasonable workflow look like that I would actually enjoy and would encourage me to create more and better content?__
 
-1. I would like to be able to write content in Markdown. Here is its [Basic Syntax](https://www.markdownguide.org/basic-syntax/) and a [tutorial](https://www.markdowntutorial.com).
-2. Content metadata (e.g., a post's category, whether it's featured or not, dates, etc.) should be stored in a single [JSON](https://www.w3schools.com/js/js_json_intro.asp) file.
-3. The "presentation layer" should not be limited by a small selection of templates.
-4. I would like to see the website locally before pushing changes to the remote GitHub repository.
-5. Since I often write about computer programming, source code should be rendered beautifully.
-6. I would like to store the content in a GitHub repository rather than a SQL database.
-7. Changes to the GitHub repository should trigger a rebuild/republish of the website.
-8. The public website should load really fast, but hosting should cost very little.
+1. Write content in Markdown. Here is its [Basic Syntax](https://www.markdownguide.org/basic-syntax/) and a [tutorial](https://www.markdowntutorial.com).
+2. Store content metadata (e.g., a post's category, whether it's featured or not, dates, etc.) in a single [JSON](https://www.w3schools.com/js/js_json_intro.asp) file.
+3. Ensure the "presentation layer" is not limited by a small selection of templates.
+4. Preview the website locally before pushing changes to the remote GitHub repository.
+5. Render source code beautifully since I often write about computer programming.
+6. Store the content in a GitHub repository rather than a SQL database.
+7. Trigger a rebuild/republish of the website upon changes to the GitHub repository.
+8. Ensure the public website loads fast while keeping hosting costs low.
 
 ## Popular Frameworks
 
 There are several popular frameworks for building static websites, such as:
 
-1. [Hugo](https://gohugo.io) is a static site generator written in Go. It is optimized for speed, easy use, and configurability. Hugo takes a directory with content and templates and renders them into a full HTML website.
-2. [Gridsome](https://gridsome.org) is a scalable generator that uses Vue.js to help you create static pages.
-3. [Gatsby](https://www.gatsbyjs.com) is great for building blazing-fast, modern apps and websites with React.
+1. [Hugo](https://gohugo.io): A static site generator written in Go, optimized for speed, easy use, and configurability. It takes a directory with content and templates and renders them into a full HTML website.
+2. [Gridsome](https://gridsome.org): A scalable generator that uses [Vue.js](https://vuejs.org) to help you create static pages.
+3. [Gatsby](https://www.gatsbyjs.com): Great for building blazing-fast, modern apps and websites with [React](https://react.dev).
 
-However, each comes with its own considerations, such as:
+However, each comes with its own considerations:
 
 ### Hugo
 - **Steeper Learning Curve**: Hugo has a steeper learning curve compared to some other static site generators, particularly due to its templating language and configuration options.
 - **Complex Configuration**: Its configuration can become quite complex, especially for larger sites with many custom layouts and features.
 
 ### Gridsome
-- **Vue-Specific**: Gridsome is tightly coupled with Vue.js, so it's not the best choice for developers who prefer or are more experienced with React or other frameworks.
+- **Vue-Specific**: Gridsome is tightly coupled with [Vue.js](https://vuejs.org), so it's not the best choice for developers who prefer or are more experienced with React or other frameworks.
 
 ### Gatsby
-- **Complex Setup**: The setup and configuration of Gatsby can be complex and overwhelming for beginners, especially with its reliance on React and GraphQL.
+- **Complex Setup**: The setup and configuration of Gatsby can be complex and overwhelming for beginners, especially with its reliance on [React](https://react.dev) and [GraphQL](https://graphql.org).
 - **Dependency Management**: Gatsby has many dependencies, and keeping them all updated and compatible can be a challenge.
 - **High Resource Usage**: Developing with Gatsby can be resource-intensive, requiring more powerful hardware to run efficiently.
 
@@ -130,23 +129,23 @@ Let's ask ChatGPT to create some cool stories (including summaries and cover ima
 2. "Can you write a one-sentence summary for each story?"
 3. "Can you create an engaging cover image for each story that makes you really want to read the story?"
 
-Once you have the content, arranged in a systematic way:
+Of course, you can reuse the [stories and images](https://github.com/wolfpaulus/static-site-generator/) ChatGPT created for me, but it is important to arranged the content in a systematic way:
 
-- Start a new Python project in VSCode. I.e., create a virtual environment.
-- Create a `posts` directory and 5 _Markdown_ files, then copy and paste the Markdown into the 5 files.
+- Start a new Python project in VSCode and create a virtual environment.
+- Create a `posts` directory and copy the 5 _Markdown_ files into it.
 - I named those files: `triumph.md`, `dilemma.md`, `wizard.md`, `dream.md`, and `discovery.md`.
-- Create an `assets/images` directory and move the generated images into it.
+- Create an `assets/images` directory and copy the generated images into it.
 - Create a `context.json` file with this initial content:
 ```json
 { 
-    "content": {
-        "posts" : []
-    }
+  "content": {
+    "posts" : []
+  }
 }
 ```
-- Finally, create a dictionary like the one below for every story, and put it into the posts list: 
+- Finally, create a dictionary like the one below for every story, and put it into the content's __posts__ list: 
 ```json
- {
+{
   "name": "triumph",
   "cover": "triumph.png",
   "title": "The Beginner's Triumph",
@@ -158,17 +157,15 @@ Once you have the content, arranged in a systematic way:
 
 # 3. DIY Static Site Generation
 
-Picking one of the available static site generatores almost feels like deciding on a CMS 10 years ago when the choices were Wordpress, Joomla, Drupal, etc.
-The aforementioned eight workflow requirements don't look overly complicated, let's try to that tacle them one at a time.
+Choosing a static site generator can feel like picking a CMS a decade ago, with options like WordPress, Joomla, and Drupal. But the eight workflow requirements outlined earlier seem straightforward enough to tackle them one by one.
 
 ## 1. Writing content in Markdown
 
-That's really easy, just install VSCode. Here is a short post showing [How to Use Markdown in VSCode](https://www.freecodecamp.org/news/how-to-use-markdown-in-vscode/).
-Create a new folder (e.g. posts) and start putting markdown files (files with an _md_ extension) into it.
+Writing content in Markdown is easy. Check out this post on [How to Use Markdown in VSCode](https://www.freecodecamp.org/news/how-to-use-markdown-in-vscode/). Create a new folder (e.g., `posts`) and start putting Markdown files into it.
 
-## 2. Content Meta Data
+## 2. Storing content metadata in a single JSON file
 
-Let's add some site metadata to the `context.json` file. I would suggest something like this:
+Let's add some site metadata to a `context.json` file. E.g.:
 
 ```json
 {
@@ -203,30 +200,30 @@ Let's add some site metadata to the `context.json` file. I would suggest somethi
 }
 ```
 
-## 3. Presentation Layer
+## 3. Ensuring access to a large selection of site templates
 
-There are quite a few web sites providing access to HTML site templates. Some provide great customizable templates even for free.
-Here are a few examples:
+There are many websites offering HTML site templates. Here are a few examples:
 
-1. [HTML5up](https://html5up.net) - Spiffy HTML5 site templates that are fully responsive built on HTML5 + CSS3, and 100% free under the Creative Commons License.
-1. [Lexington Themes](https://lexingtonthemes.com) - free and premium multipage themes and UI Kits
-1. [Code Stitch](https://www.codestitch.app) - HTML and CSS Template Library
-1. [envato](https://themeforest.net/category/site-templates) - HTML Templates and HTML Website Templates
-1. [Pure CSS](https://purecss.io) - A set of small, responsive CSS modules that you can use in every web project.
-1. [W3.CSS Templates](https://www.w3schools.com/w3css/w3css_templates.asp) - Simple responsive W3.CSS website templates
+1. [HTML5up](https://html5up.net) - Free, responsive HTML5 site templates.
+1. [Lexington Themes](https://lexingtonthemes.com) - Free and premium multipage themes and UI kits.
+1. [Code Stitch](https://www.codestitch.app) - HTML and CSS Template Library.
+1. [Envato](https://themeforest.net/category/site-templates) - HTML Templates and Website Templates.
+1. [Pure CSS](https://purecss.io) - Small, responsive CSS modules for every web project.
+1. [W3.CSS Templates](https://www.w3schools.com/w3css/w3css_templates.asp) - Simple responsive W3.CSS website templates.
+
 
 ### Big Idea
 
-The big idea is to modify an existing HTML site template, by replacing some `html` with `jinja` code, bascially turning html files into jinja files.
+The main idea is to modify an existing site template by replacing some HTML with Jinja code, essentially turning HTML files into Jinja files.
 
-Jinja is templating language for Python developers. A template contains variables which are replaced by the values which are passed in when the template is rendered. Special placeholders in the template allow writing code similar to Python syntax. For example
+[Jinja](https://jinja.palletsprojects.com) is a templating language for Python developers. A template contains variables that are replaced by values when the template is rendered. Special placeholders in the template allow writing code similar to Python syntax. For example:
 
 #### Delimiters
 
 - {%....%} are for statements
 - {{....}} are expressions used to print to template output
 
-For example, after pip-installing jinja2, the following Python program:
+Here’s a simple example. After installing Jinja2 with `pip install jinja2`, the following Python program:
 
 ```python
 from jinja2 import Template
@@ -270,13 +267,11 @@ prints this output:
 </html>
 ```
 
-The `jinja_template` is simply a string variable that stores html with some expressions and statements.
-The `context` variable stores a dictionary, with everything we previously put into the context.json file.
-Next a Template gets instatiated from the `jinja_template` string. The render method is called, with the context as an argument. I.e., providing the render method access to the context dictionary.
+`jinja_template` is a muliline string, storing HTML code with some jinja expressions and statements. The `context` variable provides access to a dictionary, containing everything we previously put into the _context.json_ file. A Template is instantiated from the jinja_template string, and the render method is called with the context as an argument, providing access to the context dictionary.
 
 #### Getting started with Jinja
 
-Here is a link to the [Jinja Project](https://jinja.palletsprojects.com/en/3.1.x/) and this is a good [primer](https://realpython.com/primer-on-jinja-templating/)
+Here is a link to the [Jinja Project](https://jinja.palletsprojects.com/en/3.1.x/) and a good [primer](https://realpython.com/primer-on-jinja-templating/)
 
 Moving closer to production code, a `jinja_to_html` method might look something like this:
 
@@ -290,7 +285,7 @@ class Site_Generator:
     """ Generate a static website from markdown files and jinja2 templates. """
 
     def __init__(self, context_file: str):
-        """Initialize the site creator
+        """Initialize the site generator
         Args: context_file: name of the context file
         """
         with open(context_file, encoding="utf-8") as json_file:
@@ -318,10 +313,9 @@ class Site_Generator:
 
 ### HTML to Jinja
 
-While it's certainly not the prettiest choice, https://www.w3schools.com/w3css/tryw3css_templates_blog.htm is a template rich enough to show how an HTML site template can easity be converted into jinja templates.
-I saved this [html](https://www.w3schools.com/w3css/tryit.asp?filename=tryw3css_templates_blog&stacked=h) code in `templates/index.jinja` and replaced some of the html with jinja.
+I will admit it ain't pretty, but for demonstration purposes, the [W3.CSS Blog Template]( https://www.w3schools.com/w3css/tryw3css_templates_blog.htm) is rich enough to show how an HTML site template can be converted into Jinja templates. Save the HTML code as templates/index.jinja and replace some of the HTML with Jinja.
 
-For instance, I changed the header to this:
+For instance, change the header to this:
 
 ```jinja
 <!-- Header -->
@@ -331,7 +325,7 @@ For instance, I changed the header to this:
 </header>
 ```
 
-Next I replaced the three _Blog entry_ divs with this jinja for-loop:
+Replace the three Blog entry divs with this Jinja for-loop:
 
 ```jinja
 <!-- Blog entries -->
@@ -361,7 +355,7 @@ Next I replaced the three _Blog entry_ divs with this jinja for-loop:
 </div>
 ```
 
-After adding three more key value pairs (_author_name, author_about, author_avatar_) to the context.json file, I modified the _About Card_ to this:
+Optionally, add three more key-value pairs (author_name, author_about, author_avatar) to the context.json file and modify the _About Card_ to this:
 
 ```jinja
 <!-- About Card -->
@@ -375,7 +369,7 @@ After adding three more key value pairs (_author_name, author_about, author_avat
 <hr>
 ```
 
-Next, I replaced the list of featured posts with this jinja loop:
+Replace the list of _featured posts_ with this Jinja loop:
 
 ```jinja
 <!-- Posts -->
@@ -397,24 +391,21 @@ Next, I replaced the list of featured posts with this jinja loop:
 </div>
 ```
 
-Moreover, I replaced the hardcoded tag-list, with the categories of the posts as defined in the context.json file and cleaned up the footer.
-Overall, the index.jinja file got a little shorter, which is absolutely a good thing.
-
 You might be tempted, running this:
 
 ```python
-Site_Creator("context.json").jinja_to_html("index.jinja", "index.html")
+Site_Generator("context.json").jinja_to_html("index.jinja", "index.html")
 ```
 
 However, there is still a little bit of setup work required. Let's add a `generate_site` method to the `Site_Generator` class and run that instead.
 
 ```python
-    def generate_site(self):
-        """Generate the static website.
-        1. Remove the site_dir and re-create it
-        2. Copy the static directories
-        3. Render the index page
-        """
+def generate_site(self):
+    """Generate the static website.
+    1. Remove the site_dir and re-create it
+    2. Copy the static directories
+    3. Render the index page
+    """
     site_dir = Path.cwd().joinpath(self.context.get("site_dir"))
     rmtree(site_dir, ignore_errors=True)
     site_dir.mkdir()
@@ -430,11 +421,12 @@ if __name__ == "__main__":
 
 ## 4. Local Preview
 
-To preview the just generated `index.html` file, install the __ritwickdey.liveserver__ VSCode extension, to _"launch a development local Server with live reload feature for static & dynamic pages"_.  
-I also added this key/value pair to the ./.vscode/settings.json file: `"liveServer.settings.root": "/public"`, pointing the local webserver to the root directory. 
+To preview the just generated `index.html` file, install the [ritwickdey.liveserver](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer) VSCode extension, to _"launch a development local Server with live reload feature for static & dynamic pages"_.  
+I also added this key/value pair to the ./.vscode/settings.json file: `"liveServer.settings.root": "/public"`, which points the local webserver to the site's root directory. For starting the server look at the bottom/right in VSCode.
 
-Nice, but if you look closely, the page only contains metadata, information stored in the context,json file and there is still some work ahead of us. The markdown documents need to be converted into html and for that we need another jinja template.  
-Once again, I started with the index.html file as a starting point and saved it as `templates/post.jinja`. At its core, it looks like this now:
+
+Notice that this page contains only metadata, information stored in the _context.json_ file and there is still some work ahead of us. The markdown documents still need to be converted into HTML and for that we need another jinja template.  
+Once again, I used with the _index.html_ file as a starting point and saved it as templates/post.jinja. At its core, it looks something like this now:
 
 ```jinja
 <!-- Header -->
@@ -462,7 +454,7 @@ Once again, I started with the index.html file as a starting point and saved it 
 ```
 
 ### Markdown to html
-Converting Markdown to html is straightforward, after pip installing the markdown module:
+Converting Markdown to HTML is straightforward, after pip installing the markdown module:
 ```shell
 pip install markdown
 ```
@@ -480,8 +472,8 @@ def md_to_html(self, file_name: str) -> str:
 
 ## 5. Rendering Source Code Beautifully
 
-The Markdown module has a [Code Hilite](https://python-markdown.github.io/extensions/code_hilite/) extension, which required `Pygments`, a generic syntax highlighter. Pygments was not installed as a dependency, but is just one more pip install away. 
-We also need a cool colortheme, which can be previewed [here](https://pygments.org/styles/). I liked `dracula` and therefore ran these commands in terminal:
+The Markdown module has a [Code Hilite](https://python-markdown.github.io/extensions/code_hilite/) extension, but it requires `Pygments`, a generic syntax highlighter, which is unfortunately not installed as a dependency, but is just one more pip install away.  
+We also need a cool colortheme, which can be previewed [here](https://pygments.org/styles/). I liked `dracula` and therefore ran these commands in VSCode's terminal:
 
 ```shell
 pip install Pygments
@@ -489,7 +481,8 @@ mkdir ./assets/css
 pygmentize -S dracula -f html -a .codehilite > ./assets/css/dracula.css
 ```
 
-The newly created dracula.css file needs to be put into the `post.jinja`, which at the very top now looks like this:
+A link to the newly created dracula.css file still needs to be put into the `post.jinja`, which at the very top, now looks like this:
+
 ```jinja
 <!DOCTYPE html>
 <html>
@@ -532,21 +525,19 @@ def generate_site(self):
         self.jinja_to_html("post.jinja", f"{post['name']}.html")
     self.context["post"] = None
 ```        
-After re-running `Site_Generator("context.json").generate_site()` html pages for all posts have been generated and source snippets within those pages is rendered beautifully.
+After re-running `Site_Generator("context.json").generate_site()`, html pages for all posts were generated and code snippets within those pages look beautiful.
 
-## 6. Changes to the GitHub repository should trigger a rebuild/republish of the website.
+## 6. Storing the content in a GitHub repository rather than a SQL database
 
-To have github repository changes trigger a that all html pages are regenerated and republished we need a github repsoitory and a hosting provider. Let's start with the github repository.
-
-I created a new repo on <https://github.com> and named it __static-site-generator__.
-Locally, I ran these commands inside the VSCOde terminal:
+I created a new repo on <https://github.com> and named it __static-site-generator__. Locally, I ran these commands inside VSCode's terminal:
 
 ```shell
 git init
 git branch -M main
 git remote add origin git@github.com:wolfpaulus/static-site-generator.git
 ```
-Not everything needs to be tracked in the repo. While the /public folder contains the generated html files, it does not belong into repo since the build process will generate those file. Therefore, I added this to the ./.gitignore file.
+
+Not everything needs to be tracked in the repo. While the ./public folder contains the generated html files, it does not belong into the repo since the build process will generate those files. Therefore, I added this to the ./.gitignore file.
 
 ```text
 .DS_Store
@@ -556,27 +547,32 @@ __pycache__/
 *.pyc
 ```
 
-The idea is that everytime a repo change is detected, `Site_Generator("context.json").generate_site()` is run. TO prepare for this, I added the following to the `main.py` script:
+## 7. Triggering a rebuild/republish of the website upon changes to the GitHub repository
+
+The idea is that everytime a repo change is detected, `Site_Generator("context.json").generate_site()` is run. To prepare for that, I added this at the bottom of the `main.py` script:
 
 ```python
 if __name__ == "__main__":
     Site_Generator("context.json").generate_site()
 ```
 
-Since I'm not checking in the _virtual environment_ ./.venv/, running `main.py` remotely would certainly fail, due to the missing 3rd party modules.Providing a `requirements.txt` file avaoids those problems:
+Running the main.py script remotely, requires a `requirements.txt` file that contains all the 3rd party modules that were _pip installed_ along the way. E.g.:
+
 ```text
 jinja2
 markdown
 Pygments
 ```
+
 Now it's time to add everything to git, commit, and push.
-Everything is in place now to build and host the site at [Cloudflare](https://www.cloudflare.com)
+It's all in place now to build and host the site at [Cloudflare](https://www.cloudflare.com)
 
-## 8. The public website should load really fast, but hosting should cost very little.
+## 8. Fast, Cost-Effective Hosting with Cloudflare Pages
 
-Here is a link to Cloudflare's [Pages Git integration guide](https://developers.cloudflare.com/pages/get-started/git-integration/)
+Deploy your site using Cloudflare Pages for fast and cost-effective hosting. Follow the instructions on [Cloudflare Pages](https://developers.cloudflare.com/pages/) to connect your GitHub repository and deploy the site.
 
-Login to Cloudflare and navigate to "Workers & Pages"
+Specifically, here is a link to Cloudflare's [Pages Git integration guide](https://developers.cloudflare.com/pages/get-started/git-integration/). After logging in to Cloudflare and navigating to _"Workers & Pages"_, I did the following:
+
 1. Click the __Create__ button
 1. Click on the __Pages__ tab
 1. Click the __Connect to Git__ button
@@ -585,15 +581,12 @@ Login to Cloudflare and navigate to "Workers & Pages"
 1. Click the __Begin setup__ button.
   1. Enter a Project name: `webgenerator` (Note the url, e.g: _Your project will be deployed to webgenerator.pages.dev._)
   1. Enter the git branch: `main`
-  1. Framwork preset: None
+  1. Framwork preset: `None`
   1. Build command: `python3 main.py`
   1. Build output directory: `public`
 1. Click the __Save and Deploy__ button.
 
-Success! Your project is deployed to Region: Earth
-You can preview your project at [webgenerator.pages.dev](https://webgenerator.pages.dev)
-
-Initially, it takes a few minutes for the new domain name to propagate. From now on, every change pushed to Github will result in a regeneration of the site.
+Initially, it takes a few minutes for the new domain name to propagate. From now on, every change pushed to Github will result in a regeneration of the site. My site is up and running here now: [webgenerator.pages.dev](https://webgenerator.pages.dev)
 
 ### Cloudflare Pages
 Cloudflare Pages is very cost-effective, and it's very easy to deploy code. A free account comes with the following limits:
@@ -606,5 +599,6 @@ Cloudflare Pages is very cost-effective, and it's very easy to deploy code. A fr
 - A build needs to complete within 20 minutes
 - Up to 500 builds per month
 
+
 ## Summary
-This comprehensive guide detailed the transition from a CMS like WordPress to a static site generator, providing insights into both platforms' functionalities. Initially, WordPress's robust CMS capabilities are explored, highlighting its PHP and MySQL components. The guide then delved into static site generation, emphasizing the ease of writing in Markdown, managing metadata with JSON, and using Jinja for templating. Practical steps are provided for setting up the site, rendering Markdown to HTML, and deploying the site on Cloudflare for fast, affordable hosting. The guide is ideal for those seeking a more efficient and customizable web development workflow.
+Transitioning from WordPress to a static site generator using Markdown and Jinja offers a lightweight, efficient, and customizable approach to content management. This guide provides a comprehensive workflow to write content in Markdown, manage metadata with JSON, and leverage Jinja for flexible templating. By setting up a local development environment, automating workflow with GitHub, and deploying via Cloudflare, you can achieve a fast, cost-effective, and streamlined static site that encourages better content creation and management.
