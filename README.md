@@ -592,13 +592,14 @@ Initially, it takes a few minutes for the new domain name to propagate. From now
 Cloudflare Pages is very cost-effective, and it's very easy to deploy code. A free account comes with the following limits:
 
 #### Limits
-- Up to 100 sites per account
-- To more than 20,000 files
+- Unlimited sites, with up to 100 domains per site
+- Unlimited backwidth
+- Unlimited static requests
+- Up to 20,000 files
 - Each file needs to be smaller than 25MB
 - The optional _headers file can have a maximum of 100 rules.
-- A build needs to complete within 20 minutes
 - Up to 500 builds per month
-
+- Each build needs to complete within 20 minutes
 
 ## Summary
 Transitioning from WordPress to a static site generator using Markdown and Jinja offers a lightweight, efficient, and customizable approach to content management. This guide provides a comprehensive workflow to write content in Markdown, manage metadata with JSON, and leverage Jinja for flexible templating. By setting up a local development environment, automating workflow with GitHub, and deploying via Cloudflare, you can achieve a fast, cost-effective, and streamlined static site that encourages better content creation and management.
