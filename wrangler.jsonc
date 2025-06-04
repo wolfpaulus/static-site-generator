@@ -1,7 +1,0 @@
-{
-  "name": "static-site-generator",
-  "compatibility-date": "2025-06-04",
-  "assets": {
-    "directory": "./public/"
-  }
-}

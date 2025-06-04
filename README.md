@@ -3,7 +3,7 @@ __"A Journey from WordPress to Markdown and Jinja"__
 
 ### Status ..
 ![License](https://img.shields.io/badge/License-MIT-green.svg)
-![up badge](https://img.shields.io/website-up-down-green-red/http/webgenerator.pages.dev.svg)
+![up badge](https://img.shields.io/website-up-down-green-red/http/static-site-generator.wolfpaulus.workers.dev.svg)
 
 ### Abstract
 Embark on a journey transitioning from a heavy CMS to a streamlined static site generator using Markdown and Jinja. This guide navigates the complexities of CMS, outlining benefits and drawbacks, and then transitions to the simplicity and efficiency of static site generation. By leveraging Markdown for content creation and Jinja for templating, this approach reduces overhead, improves site speed, and enhances customization. 
@@ -23,7 +23,7 @@ Embark on a journey transitioning from a heavy CMS to a streamlined static site 
 ### Big Idea
 
 The main idea is to publish markdown content in HTML, using Jinja Templates.  
-[Github Repository](https://github.com/wolfpaulus/static-site-generator/) | [Posts in Markdown](https://github.com/wolfpaulus/static-site-generator/tree/main/posts) | [Demo Website](https://webgenerator.pages.dev)
+[Github Repository](https://github.com/wolfpaulus/static-site-generator/) | [Posts in Markdown](https://github.com/wolfpaulus/static-site-generator/tree/main/posts) | [Demo Website](https://static-site-generator.wolfpaulus.workers.dev)
 
 
 ## 1. WordPress
@@ -567,26 +567,26 @@ Pygments
 Now it's time to add everything to git, commit, and push.
 It's all in place now to build and host the site at [Cloudflare](https://www.cloudflare.com)
 
-## 8. Fast, Cost-Effective Hosting with Cloudflare Pages
+## 8. Fast, Cost-Effective Hosting with Cloudflare Workers
 
-Deploy your site using Cloudflare Pages for fast and cost-effective hosting. Follow the instructions on [Cloudflare Pages](https://developers.cloudflare.com/pages/) to connect your GitHub repository and deploy the site.
+Deploy your site using Cloudflare Pages for fast and cost-effective hosting. Follow the instructions on [Cloudflare Workers](https://developers.cloudflare.com/workers/) to connect your GitHub repository and deploy the site.
 
-Specifically, here is a link to Cloudflare's [Pages Git integration guide](https://developers.cloudflare.com/pages/get-started/git-integration/). After logging in to Cloudflare and navigating to _"Workers & Pages"_, I did the following:
+After logging in to Cloudflare and navigating to Compute and _"Workers & Pages"_:
 
 1. Click the __Create__ button
-1. Click on the __Pages__ tab
+1. Click the "Get started" button next to "Import a repository"
 1. Click the __Connect to Git__ button
-1. Add/connect your GitHub account
-1. Select the `static-site-generator` repo
-1. Click the __Begin setup__ button.
-  1. Enter a Project name: `webgenerator` (Note the url, e.g: _Your project will be deployed to webgenerator.pages.dev._)
+1. Connect your `static-site-generator` repo
+1. Fill out the Configure your project form:
+  1. Enter a Project name: `static-site-generator` which defaults to the name of the git repository. 
   1. Enter the git branch: `main`
-  1. Framwork preset: `None`
   1. Build command: `python3 main.py`
-  1. Build output directory: `public`
+  1. Deply command: `npx wrangler deploy --compatibility-date 2025-06-04 --assets=./public`
 1. Click the __Save and Deploy__ button.
 
-Initially, it takes a few minutes for the new domain name to propagate. From now on, every change pushed to Github will result in a regeneration of the site. My site is up and running here now: [webgenerator.pages.dev](https://webgenerator.pages.dev)
+Initially, it takes a few minutes for the new domain name to propagate. From now on, every change pushed to Github will result in a regeneration of the site. My site is up and running here now: [static-site-generator.wolfpaulus.workers.dev](static-site-generator.wolfpaulus.workers.dev).
+You can also add your own domain or subdomain.
+
 
 ### Cloudflare Pages
 Cloudflare Pages is very cost-effective, and it's very easy to deploy code. A free account comes with the following limits:
