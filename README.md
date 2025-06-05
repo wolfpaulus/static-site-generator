@@ -18,7 +18,7 @@ Embark on a journey transitioning from a heavy CMS to a streamlined static site 
 - Methods for converting Markdown content to HTML
 - Tips for rendering source code beautifully within posts
 - Workflow automation using GitHub for site rebuilding and republishing
-- Deploying a fast, cost-effective static site using Cloudflare Pages
+- Deploying a fast, cost-effective static site using Cloudflare Workers
 
 ### Big Idea
 
@@ -569,37 +569,32 @@ It's all in place now to build and host the site at [Cloudflare](https://www.clo
 
 ## 8. Fast, Cost-Effective Hosting with Cloudflare Workers
 
-Deploy your site using Cloudflare Pages for fast and cost-effective hosting. Follow the instructions on [Cloudflare Workers](https://developers.cloudflare.com/workers/) to connect your GitHub repository and deploy the site.
+Deploy your site using Cloudflare Workers for fast and cost-effective hosting. Follow the instructions on [Cloudflare Workers](https://developers.cloudflare.com/workers/) to connect your GitHub repository and deploy the site.
 
 After logging in to Cloudflare and navigating to Compute and _"Workers & Pages"_:
 
 1. Click the __Create__ button
-1. Click the "Get started" button next to "Import a repository"
+1. Click the __Get started__ button next to "Import a repository"
 1. Click the __Connect to Git__ button
 1. Connect your `static-site-generator` repo
 1. Fill out the Configure your project form:
-  1. Enter a Project name: `static-site-generator` which defaults to the name of the git repository. 
+  1. Enter a Project name: `static-site-generator` which defaults to the name of the git repository.
   1. Enter the git branch: `main`
   1. Build command: `python3 main.py`
-  1. Deply command: `npx wrangler deploy --compatibility-date 2025-06-04 --assets=./public`
+  1. Deploy command: `npx wrangler deploy --compatibility-date 2025-06-04 --assets ./public/`
 1. Click the __Save and Deploy__ button.
 
-Initially, it takes a few minutes for the new domain name to propagate. From now on, every change pushed to Github will result in a regeneration of the site. My site is up and running here now: [static-site-generator.wolfpaulus.workers.dev](static-site-generator.wolfpaulus.workers.dev).
+
+Initially, it takes a few minutes for the new domain name to propagate. From now on, every change pushed to Github will result in a regeneration of the site. My site is up and running here now: [https://static-site-generator.wolfpaulus.workers.dev](https://static-site-generator.wolfpaulus.workers.dev).
 You can also add your own domain or subdomain.
 
+### Cloudflare Workers
+[Cloudflare Workers](https://developers.cloudflare.com/workers/) is so much more than CICD, which is what it's used for here. However, it's very cost-effective, and it makes it very easy to deploy code.
+With regards to CICD, a free account comes with the following [limits](https://developers.cloudflare.com/workers/ci-cd/builds/limits-and-pricing/).
+E.g. the free plan includes 3.000 build minutes per month .. building the _static-site-generator_ site took 75 seconds.
 
-### Cloudflare Pages
-Cloudflare Pages is very cost-effective, and it's very easy to deploy code. A free account comes with the following limits:
-
-#### Limits
-- Unlimited sites, with up to 100 domains per site
-- Unlimited backwidth
-- Unlimited static requests
-- Up to 20,000 files
-- Each file needs to be smaller than 25MB
-- The optional _headers file can have a maximum of 100 rules.
-- Up to 500 builds per month
-- Each build needs to complete within 20 minutes
+Once the static assets have been built, requests to static assets are [free and unlimited](https://developers.cloudflare.com/workers/static-assets/billing-and-limitations/) and there is no additional cost for storing those assets.
 
 ## Summary
 Transitioning from WordPress to a static site generator using Markdown and Jinja offers a lightweight, efficient, and customizable approach to content management. This guide provides a comprehensive workflow to write content in Markdown, manage metadata with JSON, and leverage Jinja for flexible templating. By setting up a local development environment, automating workflow with GitHub, and deploying via Cloudflare, you can achieve a fast, cost-effective, and streamlined static site that encourages better content creation and management.
+
